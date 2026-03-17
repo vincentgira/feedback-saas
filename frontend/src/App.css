@@ -20,17 +20,32 @@ body {
 }
 
 .panel {
-  width: min(100%, 28rem);
-  padding: 1.5rem;
+  width: min(100%, 38rem);
+  padding: 2rem;
   background: #ffffff;
   border: 1px solid #dbe2ea;
   border-radius: 0.75rem;
 }
 
-h1 {
+.title {
   margin: 0 0 1rem;
-  font-size: 1.75rem;
-  text-transform: lowercase;
+  font-size: 2.5rem;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.45);
+}
+
+.title-picto {
+  line-height: 1;
+}
+
+.sparkle,
+.button-sparkle {
+  color: #facc15;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
 }
 
 .idea-form {
@@ -57,6 +72,11 @@ button {
   background: #7c3aed;
   color: #ffffff;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 0 14px rgba(250, 204, 21, 0.35);
 }
 
 .idea-list {

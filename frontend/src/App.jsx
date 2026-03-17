@@ -19,7 +19,18 @@ export default function App() {
   return (
     <main className="app">
       <section className="panel">
-        <h1>FEEDBACK HUB</h1>
+        <h1 className="title">
+          <span className="sparkle" aria-hidden="true">
+            ✦
+          </span>
+          <span className="title-picto" aria-hidden="true">
+            🐴
+          </span>
+          <span>FEEDBACK HUB</span>
+          <span className="sparkle" aria-hidden="true">
+            ✦
+          </span>
+        </h1>
 
         <form className="idea-form" onSubmit={handleSubmit}>
           <input
@@ -28,7 +39,15 @@ export default function App() {
             value={ideaTitle}
             onChange={(event) => setIdeaTitle(event.target.value)}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">
+            <span className="button-sparkle" aria-hidden="true">
+              ✦
+            </span>
+            <span>va niquer ta mere</span>
+            <span className="button-sparkle" aria-hidden="true">
+              ✦
+            </span>
+          </button>
         </form>
 
         <ul className="idea-list">
