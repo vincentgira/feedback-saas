@@ -1,7 +1,12 @@
 :root {
   font-family: sans-serif;
   color: #111827;
-  background: #f8fafc;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.22) 0, transparent 18%),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.24) 0, transparent 16%),
+    radial-gradient(circle at 25% 75%, rgba(196, 181, 253, 0.28) 0, transparent 22%),
+    radial-gradient(circle at 75% 80%, rgba(250, 204, 21, 0.18) 0, transparent 20%),
+    linear-gradient(145deg, #2e1065 0%, #4c1d95 45%, #6d28d9 100%);
 }
 
 * {
@@ -10,6 +15,18 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.2) 0 0.18rem, transparent 0.2rem),
+    radial-gradient(circle at 75% 25%, rgba(250, 204, 21, 0.55) 0 0.14rem, transparent 0.16rem),
+    radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.16) 0 0.12rem, transparent 0.14rem),
+    radial-gradient(circle at 35% 85%, rgba(250, 204, 21, 0.4) 0 0.1rem, transparent 0.12rem),
+    radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.22) 0, transparent 18%),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.24) 0, transparent 16%),
+    radial-gradient(circle at 25% 75%, rgba(196, 181, 253, 0.28) 0, transparent 22%),
+    radial-gradient(circle at 75% 80%, rgba(250, 204, 21, 0.18) 0, transparent 20%),
+    linear-gradient(145deg, #2e1065 0%, #4c1d95 45%, #6d28d9 100%);
+  background-color: #4c1d95;
 }
 
 .app {
@@ -22,9 +39,11 @@ body {
 .panel {
   width: min(100%, 38rem);
   padding: 2rem;
-  background: #ffffff;
-  border: 1px solid #dbe2ea;
-  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 1rem;
+  box-shadow: 0 1.25rem 3rem rgba(46, 16, 101, 0.35);
+  backdrop-filter: blur(10px);
 }
 
 .title {
