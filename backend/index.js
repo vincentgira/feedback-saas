@@ -15,6 +15,16 @@ app.get('/feedbacks', (req, res) => {
   res.json(feedbacks);
 });
 
+// GET /weather
+app.get('/weather', (req, res) => {
+  const city = req.query.city || 'Paris';
+  res.json({
+    city: city,
+    temperature: 18,
+    description: 'Ensoleillé'
+  });
+});
+
 // POST /feedbacks
 app.post('/feedbacks', (req, res) => {
   const { title } = req.body;

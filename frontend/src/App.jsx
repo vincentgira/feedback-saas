@@ -29,7 +29,7 @@ function App() {
         const data = await response.json();
         setWeatherData(data);
       } catch (error) {
-        setWeatherError(error);
+        setWeatherError(error.message);
       } finally {
         setWeatherLoading(false);
       }
@@ -56,6 +56,20 @@ function App() {
   return (
     <div style={{ padding: '20px' }}>
       <h1>Feedback Hub</h1>
+
+      {/* Widget Météo */}
+      <div style={{ marginBottom: '30px', padding: '15px', border: '1px solid #ddd', borderRadius: '12px', backgroundColor: '#f0f8ff', maxWidth: '400px' }}>
+        <h2 style={{ marginTop: 0, fontSize: '1.2rem', color: '#0056b3' }}>Météo à Paris</h2>
+        {weatherLoading ? (
+          <p>Chargement...</p>
+        ) : weatherError ? (
+          <p style={{ color: 'red' }}>Erreur : Impossible de récupérer la météo.</p>
+        ) : weatherData && (
+          <p>Il fait actuellement <strong>{weatherData.temperature}°C</strong> avec un temps <strong>{weatherData.description}</strong>.</p>
+        )}
+      </div>
+
+      <hr style={{ marginBottom: '30px', border: '0', borderTop: '1px solid #eee' }} />
       
       <form onSubmit={handleSubmit}>
         <label>
