@@ -4,6 +4,9 @@ function App() {
   // État local pour stocker la liste des idées
   const [feedbacks, setFeedbacks] = useState([]);
   // État local pour le champ de saisie
+  const [weatherData, setWeatherData] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(true);
+  const [weatherError, setWeatherError] = useState(null);
   const [title, setTitle] = useState('');
 
   // Fonction pour récupérer les feedbacks depuis l'API
@@ -16,7 +19,23 @@ function App() {
 
   // Charger les feedbacks au chargement initial
   useEffect(() => {
+    // Fetch weather data
+    const fetchWeather = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/weather?city=Paris');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setWeatherData(data);
+      } catch (error) {
+        setWeatherError(error);
+      } finally {
+        setWeatherLoading(false);
+      }
+    };
     fetchFeedbacks();
+    fetchWeather();
   }, []);
 
   const handleSubmit = async (e) => {
