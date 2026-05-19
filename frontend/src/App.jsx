@@ -1,61 +1,42 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function App() {
-  const [ideaTitle, setIdeaTitle] = useState("");
-  const [ideas, setIdeas] = useState([]);
+function App() {
+  // État local pour stocker la liste des idées
+  const [feedbacks, setFeedbacks] = useState([]);
+  // État local pour le champ de saisie
+  const [title, setTitle] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!title) return;
 
-    const trimmedTitle = ideaTitle.trim();
-    if (!trimmedTitle) {
-      return;
-    }
-
-    setIdeas((currentIdeas) => [...currentIdeas, trimmedTitle]);
-    setIdeaTitle("");
-  }
+    // Ajouter la nouvelle idée à la liste (en mémoire locale uniquement)
+    const newFeedback = { id: Date.now(), title: title };
+    setFeedbacks([...feedbacks, newFeedback]);
+    setTitle(''); // Réinitialiser le champ
+  };
 
   return (
-    <main className="app">
-      <section className="panel">
-        <h1 className="title">
-          <span className="sparkle" aria-hidden="true">
-            ✦
-          </span>
-          <span className="title-picto" aria-hidden="true">
-            🐴
-          </span>
-          <span>FEEDBACK HUB</span>
-          <span className="sparkle" aria-hidden="true">
-            ✦
-          </span>
-        </h1>
-
-        <form className="idea-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="idea title"
-            value={ideaTitle}
-            onChange={(event) => setIdeaTitle(event.target.value)}
+    <div style={{ padding: '20px' }}>
+      <h1>Feedback Hub</h1>
+      
+      <form onSubmit={handleSubmit}>
+        <label>
+          Idea title:
+          <input 
+            type="text" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
           />
-          <button type="submit">
-            <span className="button-sparkle" aria-hidden="true">
-              ✦
-            </span>
-            <span>va niquer ta mere</span>
-            <span className="button-sparkle" aria-hidden="true">
-              ✦
-            </span>
-          </button>
-        </form>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
 
-        <ul className="idea-list">
-          {ideas.map((idea, index) => (
-            <li key={`${idea}-${index}`}>{idea}</li>
-          ))}
-        </ul>
-      </section>
-    </main>
+      <ul>
+        {feedbacks.map(f => <li key={f.id}>{f.title}</li>)}
+      </ul>
+    </div>
   );
 }
+
+export default App;
