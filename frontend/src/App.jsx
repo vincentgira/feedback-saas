@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   // État local pour stocker la liste des idées
@@ -6,14 +6,28 @@ function App() {
   // État local pour le champ de saisie
   const [title, setTitle] = useState('');
 
-  const handleSubmit = (e) => {
+  // Charger les feedbacks depuis l'API au montage du composant
+  useEffect(() => {
+    fetch('http://localhost:3000/feedbacks')
+      .then((res) => res.json())
+      .then((data) => setFeedbacks(data))
+      .catch((err) => console.error("Erreur lors de la récupération:", err));
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title) return;
 
-    // Ajouter la nouvelle idée à la liste (en mémoire locale uniquement)
-    const newFeedback = { id: Date.now(), title: title };
+    // Envoyer le nouveau feedback à l'API
+    const response = await fetch('http://localhost:3000/feedbacks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title }),
+    });
+
+    const newFeedback = await response.json();
     setFeedbacks([...feedbacks, newFeedback]);
-    setTitle(''); // Réinitialiser le champ
+    setTitle('');
   };
 
   return (
