@@ -6,12 +6,17 @@ function App() {
   // État local pour le champ de saisie
   const [title, setTitle] = useState('');
 
-  // Charger les feedbacks depuis l'API au montage du composant
-  useEffect(() => {
+  // Fonction pour récupérer les feedbacks depuis l'API
+  const fetchFeedbacks = () => {
     fetch('http://localhost:3000/feedbacks')
       .then((res) => res.json())
       .then((data) => setFeedbacks(data))
       .catch((err) => console.error("Erreur lors de la récupération:", err));
+  };
+
+  // Charger les feedbacks au chargement initial
+  useEffect(() => {
+    fetchFeedbacks();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -19,15 +24,14 @@ function App() {
     if (!title) return;
 
     // Envoyer le nouveau feedback à l'API
-    const response = await fetch('http://localhost:3000/feedbacks', {
+    await fetch('http://localhost:3000/feedbacks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title }),
     });
 
-    const newFeedback = await response.json();
-    setFeedbacks([...feedbacks, newFeedback]);
-    setTitle('');
+    fetchFeedbacks(); // Rafraîchir la liste depuis le serveur après l'ajout
+    setTitle(''); // Réinitialiser le champ de saisie
   };
 
   return (
